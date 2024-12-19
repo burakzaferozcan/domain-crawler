@@ -17,7 +17,10 @@ crawlerFactory.registerCrawler(
 router.get("/:crawlerType", async (req, res, next) => {
   let crawlerType = req.params["crawlerType"]; // req.params.crawlerType
 
-  const crawlerInstance = crawlerFactory.getCrawler(crawlerType, {});
+  const crawlerInstance = crawlerFactory.getCrawler(
+    Enum.CRAWLER_TYPES[crawlerType],
+    {}
+  );
 
   let results = await crawlerInstance.crawl(Enum.CRAWLER_URLS[crawlerType]);
 
