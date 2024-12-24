@@ -7,4 +7,5 @@ module.exports = {
     natro: "Natro",
     turhost: "Turhost",
   },
+  DATE_FORMAT: "YYYY-MM-DD",
 };
