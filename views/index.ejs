@@ -1361,5 +1361,32 @@
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="/javascripts/tabler.min.js?1692870487" defer></script>
+    <script>
+      const tablBody = document.querySelector("#domain-table tbody");
+      fetch("/prices", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((date) => {
+          data;
+          let domains = Object.keys(data);
+          domains.forEach((domain) => {
+            const row = document.createElement("tr");
+            row.appendChild(createCell(domain));
+            row.appendChild(
+              createCell(domains[domain].new_registration_fees[0])
+            );
+          });
+        });
+
+      function createCell(content) {
+        const cell = document.createElement("td");
+        cell.textContent = content;
+        return cell;
+      }
+    </script>
   </body>
 </html>

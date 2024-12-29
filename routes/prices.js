@@ -16,6 +16,18 @@ router.post("/", async (req, res, next) => {
 
   let domains = Model.groupByDomain(results);
 
+  let domainKeys = Object.keys(domains);
+
+  for (let i = 0; i < domainKeys.length; i++) {
+    let domainData = domains[domainKeys[i]];
+
+    domainData.new_registration_fees = Price.sortByPrice(
+      domainData.new_registration_fees
+    );
+    domainData.transfer_fees = Price.sortByPrice(domainData.transfer_fees);
+    domainData.renewal_fees = Price.sortByPrice(domainData.renewal_fees);
+  }
+
   res.json(domains);
 });
 
