@@ -1380,20 +1380,20 @@
             row.appendChild(createCell(domain));
             row.appendChild(
               createPriceCell(
-                data[domain].new_registration_fees[0].price,
-                data[domain].new_registration_fees[0].company
+                data[domain].new_registration_fees[0]?.price,
+                data[domain].new_registration_fees[0]?.company
               )
             );
             row.appendChild(
               createPriceCell(
-                data[domain].renewal_fees[0].price,
-                data[domain].renewal_fees[0].company
+                data[domain].renewal_fees[0]?.price,
+                data[domain].renewal_fees[0]?.company
               )
             );
             row.appendChild(
               createPriceCell(
-                data[domain].transfer_fees[0].price,
-                data[domain].transfer_fees[0].company
+                data[domain].transfer_fees[0]?.price,
+                data[domain].transfer_fees[0]?.company
               )
             );
             row.appendChild(createCell(""));
@@ -1409,10 +1409,17 @@
       }
 
       function createPriceCell(price, company) {
-        return `
-        <b>${price}</b> <br>
-        <small>${company}</small>
+        let content = `
+        <b>$${price}</b> <br>
+        ${company}
         `;
+
+        if (!price) {
+          content = "-";
+        }
+        let cell = createCell(content);
+        cell.className = "text-center";
+        return cell;
       }
     </script>
   </body>
