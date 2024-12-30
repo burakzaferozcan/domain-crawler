@@ -9,6 +9,7 @@ const Companies = require("../db/models/Companies");
 const Domains = require("../db/models/Domains");
 const Prices = require("../db/models/Prices");
 const Database = require("../db/Database");
+const moment = reqire("moment");
 
 run();
 
@@ -82,7 +83,7 @@ async function addPrices(data, domain, company) {
     domain: domain._id,
     company: company._id,
     ...price,
-    date: new Date().toJSON().split("T")[0],
+    date: moment().formant(Enum.DATE_FORMAT),
   });
 }
 function preparePrice(price) {
