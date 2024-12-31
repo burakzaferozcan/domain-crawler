@@ -5,7 +5,15 @@ var router = express.Router();
 router.get("/", function (req, res, next) {
   res.render("index", {
     title: "Express",
-    companyCount: 123,
+    companyCount: 0,
+    lastUpdateDate: new Date().toDateString(),
+  });
+});
+
+router.get("/domain/:extension", function (req, res, next) {
+  res.render("domain", {
+    title: `Prices for '${req.params.extension}' Extension`,
+    companyCount: 0,
     lastUpdateDate: new Date().toDateString(),
   });
 });
