@@ -46,7 +46,7 @@ router.post("/domain/:extension", async (req, res, next) => {
 
     console.log("results", results);
 
-    let domains = Model.groupByDomain(results, domain);
+    let domains = Model.groupByCompany(results, domain);
 
     res.json(domains);
   } else {

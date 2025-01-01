@@ -42,6 +42,42 @@ function getAllDomains(date) {
     });
 }
 
+function getDomainPrices(extension, date) {
+  const tableBody = document.querySelector("#domain-table tbody");
+
+  fetch("/prices/domain/" + extension + "?date=" + date, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      let companies = Object.keys(data);
+
+      companies.forEach((company) => {
+        for (let i = 0; i < data[company].new_registration_fees.length; i++) {
+          const row = document.createElement("tr");
+          row.appendChild(createCell(company));
+          row.appendChild(
+            createPriceCell(data[company].new_registration_fees[i]?.price)
+          );
+          row.appendChild(
+            createPriceCell(data[company].renewal_fees[i]?.price)
+          );
+          row.appendChild(
+            createPriceCell(data[company].transfer_fees[i]?.price)
+          );
+          row.appendChild(
+            createButton("See Others...", "/registrar/" + company)
+          );
+
+          tableBody.appendChild(row);
+        }
+      });
+    });
+}
+
 function createCell(content) {
   const cell = document.createElement("td");
   cell.innerHTML = content;
@@ -50,13 +86,17 @@ function createCell(content) {
 
 function createPriceCell(price, company) {
   let content = `
-  <b>$${price}</b> <br>
-  ${company}
-  `;
+      <b>$${price}</b>
+    `;
+
+  if (company) {
+    content += `<br>${company}`;
+  }
 
   if (!price) {
     content = "-";
   }
+
   let cell = createCell(content);
   cell.className = "text-center";
   return cell;
