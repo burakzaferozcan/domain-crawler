@@ -32,6 +32,7 @@ const schema = mongoose.Schema(
   }
 );
 
+schema.index({ date: 1, company: 1, domain: 1 }, { unique: true });
 class Prices extends mongoose.Model {}
 
 schema.loadClass(Prices);
