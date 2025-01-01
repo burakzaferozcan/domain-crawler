@@ -101,3 +101,11 @@ function createPriceCell(price, company) {
   cell.className = "text-center";
   return cell;
 }
+
+function createButton(content, url) {
+  let button =
+    '<a href="' + url + '" class="btn btn-green w-100">' + content + "</a>";
+
+  let cell = createCell(button);
+  return cell;
+}
