@@ -11,8 +11,10 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/domain/:extension", function (req, res, next) {
+  let extension = req.params.extension;
   res.render("domain", {
-    title: `Prices for '${req.params.extension}' Extension`,
+    title: `Prices for '${extension}' Extension`,
+    extension,
     companyCount: 0,
     lastUpdateDate: new Date().toDateString(),
   });
