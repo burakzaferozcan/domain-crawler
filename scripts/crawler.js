@@ -76,16 +76,22 @@ async function createDomain(data) {
 }
 
 async function addPrices(data, domain, company) {
-  let { domain: domainExt, type, ...price } = data;
-  price = preparePrice(price);
+  try {
+    let { domain: domainExt, type, ...price } = data;
 
-  await Prices.create({
-    domain: domain._id,
-    company: company._id,
-    ...price,
-    date: moment().formant(Enum.DATE_FORMAT),
-  });
+    price = preparePrice(price);
+
+    await Prices.create({
+      domain: domain._id,
+      company: company._id,
+      ...price,
+      date: moment().format(Enum.DATE_FORMAT),
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
 }
+
 function preparePrice(price) {
   if (price.transfer_fee == "") delete price.transfer_fee;
   if (price.renewal_fee == "") delete price.renewal_fee;
