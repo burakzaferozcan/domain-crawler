@@ -140,3 +140,14 @@ function createButton(content, url) {
   let cell = createCell(button);
   return cell;
 }
+
+function formatDate(date) {
+  let dateTimeFields = date.split("T");
+  let dateFields = dateTimeFields[0].split("-");
+  ["yıl", "ay", "gün"];
+  return dateFields[2] + "/" + dateFields["1"] + "/" + dateFields[0];
+}
+
+function putLastUpdatedDate(date) {
+  document.getElementById("lastUpdatedDate").innerHTML = formatDate(date);
+}
