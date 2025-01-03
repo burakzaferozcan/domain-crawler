@@ -151,3 +151,25 @@ function formatDate(date) {
 function putLastUpdatedDate(date) {
   document.getElementById("lastUpdatedDate").innerHTML = formatDate(date);
 }
+
+const searchInput = document.querySelector("#search");
+
+searchInput.addEventListener("input", function () {
+  let searchValue = this.value.toLowerCase();
+  let domainRows = document.querySelectorAll("#domain-table tbody tr");
+
+  domainRows.forEach((row) => {
+    const domainCell = row.querySelector("td:first-child");
+
+    if (!searchValue.startsWith(".")) searchValue = "." + searchValue;
+
+    if (
+      domainCell &&
+      domainCell.textContent.toLowerCase().startsWith(searchValue)
+    ) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});

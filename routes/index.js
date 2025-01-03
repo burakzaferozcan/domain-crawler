@@ -5,7 +5,6 @@ const Companies = require("../db/models/Companies");
 const Enum = require("../config/Enum");
 var router = express.Router();
 
-/* GET home page. */
 router.get("/", async function (req, res, next) {
   let date = await Prices.getLastDate();
   res.render("index", {
