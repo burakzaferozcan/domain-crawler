@@ -53,15 +53,7 @@
                             class="w-auto text-center text-uppercase text-muted font-weight-medium"
                           ></td>
                         </tr>
-                        <tr>
-                          <th></th>
-                          <th colspan="4">
-                            ~ = Converted to USD
-                            <div style="float: right">
-                              Last Update Date: <%=lastUpdateDate%>
-                            </div>
-                          </th>
-                        </tr>
+                        <%- include('pages/table-legend') %>
                       </thead>
                       <tbody></tbody>
                     </table>
@@ -80,6 +72,7 @@
     <script src="/javascripts/app.js"></script>
     <script>
       getDomainPrices("<%=extension%>", "<%=lastUpdateDate%>");
+      putLastUpdatedDate("<%=lastUpdateDate%>");
     </script>
   </body>
 </html>
